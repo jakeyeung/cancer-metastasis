@@ -1,3 +1,4 @@
-# Testing github commits
+# Jake Yeung
+# githubtest.R
 
-print('Hello world, github')
+x <- rnorm(5)
