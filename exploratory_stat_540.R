@@ -50,3 +50,7 @@ mean<-apply(geneMat, 2, mean)
 sd<-apply(geneMat, 2, sd)
 geneZ<-(geneMat-mean)/sd
 
+rn<-gene[,1]
+
+rownames(geneZ)<-rn
+write.table(geneZ, "geneZ.txt")
