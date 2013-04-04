@@ -3,9 +3,13 @@
 ######################
 
 setwd("~/Dropbox/STAT 540 Project/Analysis/UpdatedPlots")
+source('~/Desktop/Grad/Stat540/Project/Code/ComBat.R')
+library(directlabels)
+library(lattice)
 library(RColorBrewer)
 
 # import data after correcting for batch effect
+# processed data
 gExpDat <- read.delim("~/Dropbox/STAT 540 Project/ProcessedData/SeriesMatrixFile/Grasso_NormPriMet.txt", row.names = 1)
 str(gExpDat, list.len = 6)
 gDes <- read.delim("~/Dropbox/STAT 540 Project/MetaData/DesignTable.txt")
@@ -40,7 +44,7 @@ gDes$dayCode <- paste(gDes$dayCode, colnames(gExpDat))
 
 mCols <- colorRampPalette(rev(brewer.pal(n = 9, "Greys")))
 
-# Heatmap showing batch effect 
+# Heatmap showing batch effect after correction
 pdf("HeatmapAfterCorrectingBatchEffect.pdf")
 heatmap(cor(gExpDat), Rowv = NA, Colv = NA, symm = TRUE, revC = TRUE, labRow = gDes$dayCode, 
           col = mCols(256), margins = c(10, 10), 
@@ -48,21 +52,31 @@ heatmap(cor(gExpDat), Rowv = NA, Colv = NA, symm = TRUE, revC = TRUE, labRow = g
         ColSideColor = brewer.pal(11, "RdGy")[c(4, 7)][unclass(gDes$SampleType)])
 dev.off()
 
-# PCA Analysis
+### PCA Analysis ###
+
 pdf("PCAplotsAfterCorrectingBatchEffect.pdf")
 pcs <- prcomp(gExpDat, center = F, scale = F)
+summary(pca) # PC1 accounts for 84% of variance 
 plot(pcs)
 gDes <- cbind(gDes, pcs$rotation[gDes$GSMID, 1:10])
 colnames(gDes)
 plot(gDes[, c(1,5,6,11,12,13)], pch = 19, cex = 0.8)
 
-# plot data on first two PCs, colored by sample type
 
+# plot data on first two PCs, colored by sample type
 par(xpd=TRUE) # turn off clipping to plot legend outside
 plot(gDes[, c("PC1", "PC2")], bg = gDes$SampleType, pch = 21, cex = 1.5, col = "black")
 legend(list(x = -0.06, y = 0.17), as.character(levels(gDes$SampleType)), pch = 21, 
        pt.bg = c(1, 2, 3), cex = 0.8)
 dev.off()
+
+## 3D PCA plot 
+pdf("PCAplot_3D.pdf")
+with(gDes, 
+     cloud(PC3 ~PC1*PC2, 
+           groups = SampleType, auto.key = T))
+dev.off()
+
 
 # compute pairwise distances
 pr.dis = dist(t(gExpDat), method = "euclidean")
