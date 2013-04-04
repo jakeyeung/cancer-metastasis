@@ -1,0 +1,2 @@
+04_norm_both_mean_duplicates_merge.R 
+	Script that quantile and loess normalizes log2 expression for both target files, takes the mean for duplicate probes after normalization, creates lots for pre- and post-normalization data from the second target list, and merges normalized data from both platforms.

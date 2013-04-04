@@ -1,7 +1,0 @@
-## GSE35988_RAW.tar contains all the files (both GeneExpression and CopyNumber)
-## $ symbol is your command prompt
-
-$ tar -xvf GSE35988_RAW.tar
-
-#Note the following command might take sometime demending on your computer's processing capacity
-$ gzip -d *.gz
