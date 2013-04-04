@@ -1,0 +1,32 @@
+This is the README for the STAT540 project: exploring metastatic process using interaction networks. 
+Authors: Josh Brown, Melissa Lee, Dorji Pelzom, Raunak Shrestha, Jake Yeung
+What is in this readme:
+bibliography: contains a textfile containing references used in this project.
+inputs: consists of metadata (design, supplementary info) and processed_data (preprocessed and normalized)
+optdis_tutorial: a pdf containing optdis
+outputs: contains figures and tables generated from scripts.
+poster: pdf and powerpoint of our poster that was presented on 03-Apr-2013.
+project_proposal_workflow: deliverables throughout the semester (project proposal, outline, workflow)
+scripts: code used to generate outputs. Separated into subfolders.
+	batch_effect_analysis: code to analyze batch effect and deal with it.
+	exploratory_analysis: taking processed data and looking at clustering (PCA)
+	limma: finding differentially expressed genes between primary and metastatic using limma.
+	optdis: code for optdis algorithm to get subnetworks. 
+	pathway_analysis: code for running pathway enrichment analysis.
+	preprocessing: quality assessment, preprocessing and normalization of raw data. 
+
+	
+Things still needed to be added:
+Codes missing:
+Preprocessing -> combat? which preprocessing should we keep? too many scripts? 
+exploratory_analysis -> which one is best script for exploratory??
+limma -> venn_diagram code is missing.
+optdis codes
+IPA codes
+iGraph codes
+
+Missing:
+Inputs: processed_data: so many .txt files which ones which?
+
+
+
