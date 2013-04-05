@@ -44,6 +44,7 @@ for(i in 1:ncol(normDat)){
  }
 dev.off()
 
+# boxplots after normalization
 pdf("boxplots_afterNorm.pdf")
 boxplot(normDat, 
         xlab = "Samples", 
@@ -51,6 +52,7 @@ boxplot(normDat,
         main = "Boxplot of Background Intensities After Quantile Normalization")
 dev.off()
 
+# lowess normalization
 norm2Dat <- normalizeCyclicLoess(normDat)
 head(norm2Dat)
 
@@ -66,3 +68,6 @@ for(i in 1:ncol(normDat)){
   plotMA(norm2Dat, array = i)
 }
 dev.off()
+
+write.table(norm2Dat, "NormalizedData.txt", sep = "\t", 
+            row.names = T, col.names = NA)
